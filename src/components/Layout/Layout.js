@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
             <input id="side-drawer" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col">
                 <Header />
-                <main className="min-h-[82vh]">
+                <main className="">
                     {/* <!-- Page content here --> */}
                     {children}
                 </main>
