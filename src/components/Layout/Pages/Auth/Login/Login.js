@@ -76,6 +76,7 @@ const Login = () => {
                   Your Password
                </label>
                <input
+                  type="password"
                   id="name"
                   className="input input-bordered input-primary w-full max-w-lg"
                   {...register("password")}

@@ -12,18 +12,20 @@ const NavigationItems = () => {
             <li>
                 <NavLink to={"/"}>Home</NavLink>
             </li>
-            <li>
-                <NavLink to={"/my-tasks"}>My Tasks</NavLink>
-            </li>
-            <li>
+            {/* <li>
                 <NavLink to={"/about"}>About</NavLink>
-            </li>
+            </li> */}
             {user ? (
-                <li>
-                    <NavLink onClick={() => signOut(auth)} to={"/login"}>
-                        Sign-Out
-                    </NavLink>
-                </li>
+                <>
+                    <li>
+                        <NavLink to={"/my-tasks"}>My Tasks</NavLink>
+                    </li>
+                    <li>
+                        <NavLink onClick={() => signOut(auth)} to={"/login"}>
+                            Sign-Out
+                        </NavLink>
+                    </li>
+                </>
             ) : (
                 <>
                     <li>

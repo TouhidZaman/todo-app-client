@@ -98,6 +98,7 @@ const Signup = () => {
                </label>
                <input
                   id="password"
+                  type="password"
                   className="input input-bordered input-primary w-full max-w-lg"
                   {...register("password")}
                />
