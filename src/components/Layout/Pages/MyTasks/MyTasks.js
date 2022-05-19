@@ -34,9 +34,9 @@ const MyTasks = () => {
     }
 
     return (
-        <div className="my-2 w-2/3 mx-auto text-center p-8">
+        <div className="my-2 w-10/12 lg:w-3/5 mx-auto text-center py-4 lg:p-8">
             <AddTask tasks={tasks} setTasks={setTasks}/>
-            <TaskLists tasks={tasks} />
+            <TaskLists tasks={tasks} setTasks={setTasks}/>
         </div>
     );
 };

@@ -1,9 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import axiosInstance from '../../../../api/axiosInstance';
+import Swal from "sweetalert2";
 
-const TaskLists = ({tasks}) => {
+
+const TaskLists = ({tasks, setTasks}) => {
+    const [loading, setLoading] = useState(false);
+    //Delete Task item handler
+    const handleDeleteTaskItem = async (taskId) => {
+        const confirm = window.confirm("Are you sure ?");
+        if (confirm) {
+            setLoading(true);
+            try {
+                await axiosInstance.delete(
+                        `tasks/${taskId}`
+                    )
+                    .then((response) => {
+                        if (response.data?.acknowledged) {
+                            Swal.fire({
+                                icon: "success",
+                                title: "Your Task deleted successfully",
+                                showConfirmButton: false,
+                                timer: 1500,
+                            });
+                            const filteredItems = tasks.filter(
+                                (inventoryItem) => inventoryItem._id !== taskId
+                            );
+                            setTasks(filteredItems);
+                            setLoading(false);
+                        }
+                    });
+            } catch (error) {
+                console.log(error.message);
+                setLoading(false);
+            }
+        }
+    };
+
+    //Handling loading state
+    if (loading) {
+        return <p className="text-3xl text-center my-20">Loading...</p>;
+    }
+
     return (
         <div className="overflow-x-auto">
                 <table className="table w-full">
@@ -31,7 +71,7 @@ const TaskLists = ({tasks}) => {
                                         />
                                     </button>
                                     <button
-                                        // onClick={() => deleteItem(inventoryItem._id)}
+                                        onClick={() => handleDeleteTaskItem(task._id)}
                                         className="hover:text-red-500"
                                     >
                                         <FontAwesomeIcon
